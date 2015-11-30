@@ -1,4 +1,4 @@
-package com.example.billing.at;
+package org.thezenofcode.billing.at;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
