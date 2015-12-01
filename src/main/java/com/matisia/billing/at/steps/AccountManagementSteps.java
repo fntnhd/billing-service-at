@@ -1,10 +1,10 @@
-package org.thezenofcode.billing.at.steps;
+package com.matisia.billing.at.steps;
 
-import org.thezenofcode.billing.entity.Account;
-import org.thezenofcode.billing.entity.BillingPlan;
-import org.thezenofcode.billing.entity.BillingRate;
-import org.thezenofcode.billing.exception.ValidationException;
-import org.thezenofcode.billing.service.AccountService;
+import com.matisia.billing.entity.Account;
+import com.matisia.billing.entity.BillingPlan;
+import com.matisia.billing.entity.BillingRate;
+import com.matisia.billing.exception.ValidationException;
+import com.matisia.billing.service.AccountService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
