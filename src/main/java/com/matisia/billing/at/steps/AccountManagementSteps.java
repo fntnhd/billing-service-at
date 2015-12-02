@@ -5,6 +5,7 @@ import com.matisia.billing.entity.BillingPlan;
 import com.matisia.billing.entity.BillingRate;
 import com.matisia.billing.exception.ValidationException;
 import com.matisia.billing.service.AccountService;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -63,5 +64,10 @@ public class AccountManagementSteps {
     @Then("^the name of the account billing plan is '(.*)'")
     public void the_name_of_the_account_billing_plan_is(String billingPlanName) {
         assertEquals(billingPlanName, account.getBillingPlan().getName());
+    }
+
+    @After("@account-management")
+    public void delete_all_accounts() {
+        accountService.deleteAll();
     }
 }
