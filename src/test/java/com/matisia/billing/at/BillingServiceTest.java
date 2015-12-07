@@ -9,6 +9,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty", "json:target/cucumber.json", "html:target/site/cucumber-pretty"}, features= {"classpath:features"}, glue = {"com.matisia.billing.at.steps"})
-public class AccountManagementTest {
+public class BillingServiceTest {
 
 }

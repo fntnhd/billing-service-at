@@ -1,10 +1,13 @@
 package com.matisia.billing.at.steps;
 
+import com.matisia.billing.at.transform.BillingRateTransformer;
 import com.matisia.billing.entity.Account;
 import com.matisia.billing.entity.BillingPlan;
 import com.matisia.billing.entity.BillingRate;
 import com.matisia.billing.exception.ValidationException;
 import com.matisia.billing.service.AccountService;
+import cucumber.api.Format;
+import cucumber.api.Transform;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -34,10 +37,9 @@ public class AccountManagementSteps {
         assertNull(account);
     }
 
-    @Given("a billing plan with name '(.*)' and billing rate '(.*)' per minute exists")
-    public void a_billing_plan_with_name_and_billing_rate_per_minute_exists(String name, String rate) {
+    @Given("a billing plan with name '(.*)' and billing rate (.*) per minute exists")
+    public void a_billing_plan_with_name_and_billing_rate_per_minute_exists(String name, @Transform(BillingRateTransformer.class) BillingRate billingRate) {
         billingPlan = new BillingPlan();
-        BillingRate billingRate = new BillingRate(rate);
         billingPlan.setName(name);
         billingPlan.setBillingRate(billingRate);
     }
