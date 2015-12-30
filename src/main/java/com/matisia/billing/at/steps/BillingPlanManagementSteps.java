@@ -1,9 +1,11 @@
 package com.matisia.billing.at.steps;
 
 import com.matisia.billing.at.transform.BillingRateTransformer;
+import com.matisia.billing.entity.Account;
 import com.matisia.billing.entity.BillingPlan;
 import com.matisia.billing.entity.BillingRate;
 import com.matisia.billing.exception.ValidationException;
+import com.matisia.billing.service.AccountService;
 import com.matisia.billing.service.BillingPlanService;
 import cucumber.api.Transform;
 import cucumber.api.java.After;
@@ -12,6 +14,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+
+import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -25,6 +29,9 @@ public class BillingPlanManagementSteps {
 
     @Autowired
     private BillingPlanService billingPlanService;
+
+    @Autowired
+    private AccountService accountService;
 
     private BillingPlan billingPlan;
 
@@ -54,6 +61,36 @@ public class BillingPlanManagementSteps {
     @Then("^the billing plan rate is (.*) per minute$")
     public void the_billing_plan_rate_is_per_minute(@Transform(BillingRateTransformer.class) BillingRate expectedBillingRate) {
         assertEquals(expectedBillingRate, billingPlan.getBillingRate());
+    }
+
+    @Given("^a billing plan with name \"([^\"]*)\" exists$")
+    public void a_billing_plan_with_name_exists(String billingPlanName) throws ValidationException {
+        BillingPlan billingPlan = new BillingPlan();
+        billingPlan.setName(billingPlanName);
+        billingPlan.setBillingRate(new BillingRate("0.08"));
+        billingPlanService.createBillingPlan(billingPlan);
+    }
+
+    @Given("^no accounts use the billing plan with name \"([^\"]*)\"$")
+    public void no_accounts_use_the_billing_plan_with_name(String billingPlanName) {
+        Collection<Account> accounts = accountService.findAll();
+        assertEquals(0,accounts.size());
+    }
+
+    @When("^I delete the billing plan with name \"([^\"]*)\"$")
+    public void i_delete_the_billing_plan_with_name(String billingPlanName) throws ValidationException {
+        BillingPlan billingPlan = billingPlanService.findBillingPlanByName(billingPlanName);
+        billingPlan = billingPlanService.deleteBillingPlan(billingPlan);
+    }
+
+    @When("^I find the billing plan with name \"([^\"]*)\"$")
+    public void i_find_the_billing_plan_with_name(String billingPlanName) {
+        billingPlan = billingPlanService.findBillingPlanByName(billingPlanName);
+    }
+
+    @Then("^the billing plan with name \"([^\"]*)\" does not exist$")
+    public void the_billing_plan_with_name_does_not_exist(String billingPlanName) {
+        assertNotNull(billingPlan);
     }
 
     @After("@billing-plan-management")
