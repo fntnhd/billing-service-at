@@ -90,7 +90,7 @@ public class BillingPlanManagementSteps {
 
     @Then("^the billing plan with name \"([^\"]*)\" does not exist$")
     public void the_billing_plan_with_name_does_not_exist(String billingPlanName) {
-        assertNotNull(billingPlan);
+        assertNull(billingPlan);
     }
 
     @After("@billing-plan-management")
