@@ -1,6 +1,6 @@
-package com.matisia.billing.at.transform;
+package com.blueagility.billing.at.transform;
 
-import com.matisia.billing.entity.BillingRate;
+import com.blueagility.billing.entity.BillingRate;
 import cucumber.api.Transformer;
 
 /**

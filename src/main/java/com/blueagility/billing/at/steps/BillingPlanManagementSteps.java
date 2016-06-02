@@ -1,12 +1,12 @@
-package com.matisia.billing.at.steps;
+package com.blueagility.billing.at.steps;
 
-import com.matisia.billing.at.transform.BillingRateTransformer;
-import com.matisia.billing.entity.Account;
-import com.matisia.billing.entity.BillingPlan;
-import com.matisia.billing.entity.BillingRate;
-import com.matisia.billing.exception.ValidationException;
-import com.matisia.billing.service.AccountService;
-import com.matisia.billing.service.BillingPlanService;
+import com.blueagility.billing.at.transform.BillingRateTransformer;
+import com.blueagility.billing.entity.Account;
+import com.blueagility.billing.entity.BillingPlan;
+import com.blueagility.billing.entity.BillingRate;
+import com.blueagility.billing.exception.ValidationException;
+import com.blueagility.billing.service.AccountService;
+import com.blueagility.billing.service.BillingPlanService;
 import cucumber.api.Transform;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
